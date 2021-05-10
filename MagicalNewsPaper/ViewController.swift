@@ -58,7 +58,8 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         sceneView.session.pause()
     }
     @IBAction func saveScreenShot(_ sender: Any) {
-        LoadingOverlay.shared.showOverlay(view: self.view)
+        let loading = LoadingOverlay()
+        loading.showOverlay(view: self.view)
         //1. Create A Snapshot Of The ARView
         let screenShot = self.sceneView.snapshot()
         
@@ -70,14 +71,17 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         
         //4. Write It To The Documents Directory & Increase The Identifier
         do {
+            loading.hideOverlayView()
             try imageData.write(to: fileURL)
             identifier += 1
+            loadCustomImages()
         } catch  {
+            loading.hideOverlayView()
             print("Error Saving File")
         }
         
         //5. Load The Custom Images
-        loadCustomImages()
+        
     }
     
     func getDirectoryPath() -> String {
