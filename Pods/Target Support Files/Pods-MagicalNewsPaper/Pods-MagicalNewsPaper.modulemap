@@ -1,0 +1,6 @@
+framework module Pods_MagicalNewsPaper {
+  umbrella header "Pods-MagicalNewsPaper-umbrella.h"
+
+  export *
+  module * { export * }
+}
